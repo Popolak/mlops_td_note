@@ -1,7 +1,14 @@
 services:
-  service_b:
-    build:
-      context: ./service_b
+  service_b: #elasticsearch
+    image: elasticsearch:8.15.3
+    ports:
+      - 8000:8000
+    context: ./service_b
+    environment:
+      discovery.type: 'single-node'
+      xpack.security.enabled: 'false'
+      ELASTIC_PASSWORD: 'password' #Oui, c'est un password nul
+      ES_JAVA_OPTS: '-Xmx2g -Xms2g'
     volumes:
       - /tmp:/tmp  # Share /tmp for the Unix Domain Socket
     restart: always
@@ -15,3 +22,12 @@ services:
     depends_on:
       - service_b
     restart: always
+  kibana:
+    image: kibana:8.15.3
+    volumes:
+      - ./kibana.yml:\\C:\Users\alkil\Desktop\INFO\M2\MLOPS\build_api_ml\hands_on_microservices\kibana\kibana.yml
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_USERNAME: 'kibana_system'
+      ELASTICSEARCH_PASSWORD: 'SH5aun=gGL5ZjNMR2cHR'
