@@ -1,3 +1,11 @@
+### Justification des choix
+1. Utiliser docker compose permet de lancer tout les containers en une seule commande. Je n'implémente pas les Domain Unix Socket car nginx les remplace en étant plus intuitif.
+2. J'ai choisi d'implémenter kibana et elasticsearch pour la base. Je suis conscient que la base elasticsearch est orienté documents, mais le td de big data durant lequel nous devions travailler dessus s'est soldé par des erreurs en cascades, ce TD noté était une occasion de retravailler avec cette base. Une base de données est nécessaire pour enrichir les capacités de nos services.
+3. Pas de github actions pour ma part. Le scope du projet étant uniquement local, celà ne me parait pas nécessaire d'automatiser des déploiements. A la limite on peut imaginer des actions pour automatiser des tests néanmoins.
+4. L'utilisation de nginx n'est pas nécessaire, d'autant plus avec les domain unix sockets. Mais la praticité apportée par nginx m'a poussé à l'utiliser.
+5. De la même manière que la CI/CD avec github actions, minikube ne me semble pas adapté à ce projet. Minikube permet d'utiliser éssentiellement kubernetes en local, en s'abrogeant le besoin d'une machine virtuelle en ligne. 
+
+
 # Vers du DevOps (Code Engineering)
 
 **Attention : ces TD font office de contrôle continu pour le module MLOps. Une note individuelle sera attribuée.**
